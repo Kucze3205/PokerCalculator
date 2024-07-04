@@ -1,0 +1,13 @@
+﻿<Application x:Class="PokerCalculatorWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PokerCalculatorWPF"
+             xmlns:cv="clr-namespace:PokerCalculatorWPF.Converters"
+             
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <cv:ImagePathConverter x:Key="ImagePathConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
