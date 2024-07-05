@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ImagePathConverter.cs" />
+    <Compile Include="Converters\WidthToFontSizeConverter.cs" />
     <Compile Include="Model\Calculator.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\RelayCommand.cs" />

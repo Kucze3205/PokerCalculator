@@ -14,7 +14,7 @@
     
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.4*" MinHeight="45" />
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition Height="1.5*"/>
@@ -24,18 +24,20 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Twoje karty" Grid.Column="0" Margin="10, 0" 
-                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="20" 
+                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="32" 
                    HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Karty Na stole" Grid.Column="2" Margin="10, 0" 
-                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="20" 
-                   HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
-        
+        <TextBlock Text="Karty Na stole" Grid.Column="3" Margin="10, 0" 
+                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="32"             
+                   HorizontalAlignment="Center" Grid.ColumnSpan="3">
+        </TextBlock>
+
         <ItemsControl ItemsSource="{Binding MyCards}" Grid.Row="1" Grid.ColumnSpan="2">
 
             <ItemsControl.ItemsPanel>
@@ -51,7 +53,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <ItemsControl ItemsSource="{Binding CardsOnTable}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3">
+        <ItemsControl ItemsSource="{Binding CardsOnTable}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid VerticalAlignment="Bottom" HorizontalAlignment="Center" Columns="5"/>
@@ -64,16 +66,16 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
-        <TextBlock Text="Prawdopodobieństwo: " Grid.Row="2" Grid.Column="1" 
+
+        <TextBlock Text="Prawdopodobieństwo: " Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                    Margin="10, 0" FontStretch="Medium" FontWeight="ExtraLight" 
-                   FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2"/>
-        <TextBlock Text ="{Binding Result}" Grid.Row="2" Grid.Column="3" 
-                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="20" 
+                   FontSize="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   />
+        <TextBlock Text ="{Binding Result}" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"
+                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="32" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Button Grid.Column="4" Grid.Row="2" Margin="20" Command="{Binding ResetButton}">
+        <Button Grid.Column="5" Grid.Row="2" Margin="20" Command="{Binding ResetButton}">
             <TextBlock Text="RESET" Margin="10, 0" FontStretch="Medium" FontWeight="ExtraLight" FontSize="25"/>
         </Button>
 

@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <cv:ImagePathConverter x:Key="ImagePathConverter"/>
+            <cv:WidthToFontSizeConverter x:Key="WidthToFontSizeConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
