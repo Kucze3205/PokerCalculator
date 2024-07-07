@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,9 +20,10 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
         private List<Card> _inGameCards = new List<Card>();
         private List<Card> _Hand = new List<Card>();
         private Card[] deck2 = new Card[52];
-        private Simulator simulator = new Simulator();
+        public Simulator simulator = new Simulator();
         private string result;
 
+        Thread simulatingInBackGround = null;
         #endregion
 
         #region Properties
@@ -73,8 +75,9 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
         }
 
         #endregion
-        public ICommand ResetButton { get; set; }
+
         #region Commands
+        public ICommand ResetButton { get; set; }
 
         #endregion
 
@@ -94,6 +97,7 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
                 }
             }
 
+            simulator.sendValue = reseveValue;
             ResetButton = new RelayCommand(new Action<object>(reset));
         }
         #endregion
@@ -101,6 +105,10 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
         #region Methods
         private void Getid(string str)
         {
+            if (simulatingInBackGround != null && simulatingInBackGround.IsAlive) 
+            {
+                simulatingInBackGround.Abort();
+            }                              
 
             if (_Hand.Count == 2)
             {
@@ -113,15 +121,15 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
                 MyCards.Add(new Card(str));
             }          
 
-            double percent = 0;
             if (_Hand.Count == 2)
             {
-                percent = simulator.probability(_Hand[0], _Hand[1], _inGameCards, 3);
-                percent *= 100;
-                percent = Math.Round(percent, 3);
-                Result = percent + "%";
-            }
-                
+
+                simulatingInBackGround = new Thread(new ThreadStart(() =>
+                {
+                    simulator.probability(_Hand[0], _Hand[1], _inGameCards, 3);
+                }));
+                simulatingInBackGround.Start();
+            }                                 
         }
 
         private void reset(object obj)
@@ -131,6 +139,17 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
             CardsOnTable.Clear();
             MyCards.Clear();
             Result = "";
+
+            if (simulatingInBackGround != null && simulatingInBackGround.IsAlive)
+            {
+                simulatingInBackGround.Abort();
+            }
+        }
+
+        private void reseveValue(float value)
+        {
+            Result = Math.Round(value * 100, 2) + "%";
+            Thread.Sleep(350);
         }
         #endregion
     }

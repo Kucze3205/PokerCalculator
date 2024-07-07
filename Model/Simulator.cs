@@ -21,6 +21,9 @@ namespace PokerCalculatorWPF.Model
 {
     public class Simulator
     {
+        public delegate void MainUserControlMethod(float result);
+        public MainUserControlMethod sendValue;
+
         public List<int> combination = new List<int>();
         public Dictionary<string, int> Full_hierarhy = null;
 
@@ -30,7 +33,7 @@ namespace PokerCalculatorWPF.Model
             Full_hierarhy = JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonContent);                                    
         }
 
-        public double probability(Card first, Card second, List<Card> table, int players)
+        public void probability(Card first, Card second, List<Card> table, int players)
         {           
             string type = "hdcs";
             Random rnd = new Random();
@@ -40,7 +43,7 @@ namespace PokerCalculatorWPF.Model
 
             int counter = 0;
 
-            while (counter++ < 100000)
+            while (counter++ < 100000 || true)
             {
                 HashSet<Card> HandCards = new HashSet<Card> { first, second };
                 bool win = true;
@@ -70,7 +73,6 @@ namespace PokerCalculatorWPF.Model
                         do
                         {
                             opp_hand[j] = new Card(type[rnd.Next(4)] + rnd.Next(2, 15).ToString());
-                            cardsCounter[opp_hand[j].value, opp_hand[j].type]++;
                         } while (act_table.Contains(opp_hand[j]) || HandCards.Contains(opp_hand[j]));
                         HandCards.Add(opp_hand[j]);
                     }
@@ -84,10 +86,10 @@ namespace PokerCalculatorWPF.Model
                 }
 
                 games++;
-                if(win) wins++;  
-            }
+                if(win) wins++;               
 
-            return (float)wins / games;
+                if(counter % 500 == 0) sendValue((float)wins / games);      
+            }          
         }
 
         int FindBestValue(Card first, Card second, List<Card> formation)

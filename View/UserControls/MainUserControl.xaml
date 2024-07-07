@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PokerCalculatorWPF.View.UserControls"
              xmlns:vm="clr-namespace:PokerCalculatorWPF.ViewModel.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="675" MinHeight="750" MinWidth="675">
+             d:DesignHeight="750" d:DesignWidth="600" MinHeight="750" MinWidth="675">
     
     <UserControl.DataContext>
         <vm:MainUserControlViewModel/>

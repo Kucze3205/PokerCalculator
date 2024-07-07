@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:PokerCalculatorWPF.ViewModel"
         xmlns:local="clr-namespace:PokerCalculatorWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow">
 
     <Window.DataContext>
         <vm:MainViewModel/>

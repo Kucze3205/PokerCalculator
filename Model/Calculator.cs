@@ -61,7 +61,7 @@ namespace PokerCalculatorWPF.Model
             sum += valueOf2.Sum(x => x.Value);
             amount += valueOf2.Count();
 
-            ConvertfromJson BestF = null;
+            
 
             double handval = (double)sum / amount;
 
