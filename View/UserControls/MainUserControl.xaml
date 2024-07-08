@@ -79,25 +79,27 @@
             <TextBlock Text="RESET" Margin="10, 0" FontStretch="Medium" FontWeight="ExtraLight" FontSize="25"/>
         </Button>
 
+        <TextBlock Text="players:" Grid.Row="2" Grid.Column="4" Margin="0, 30, 0, 50" 
+                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="15"/>
+        <ComboBox x:Name="playersAmountTab" Grid.Row="2" Grid.Column="4" Margin="0, 50, 150, 0" Height="30" 
+                  ItemsSource="{Binding playersAmount}" SelectedValue="{Binding PlayersNum}"/>
 
-        <ItemsControl ItemsSource="{Binding Deck}" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="2" >
-            
+        <ItemsControl ItemsSource="{Binding Deck}" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="2" IsEnabled="{Binding AddCards}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Margin="50,10" Columns=" 13" VerticalAlignment="Bottom"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding GetId}" Padding="0">
+                    <Button Command="{Binding CardClicked}" Padding="0" Visibility="{Binding Visibility, Converter={StaticResource BoolToVisibilityConverter}}" >
                         <Image Source="{Binding Id, Converter={StaticResource ImagePathConverter}}" 
                                Stretch="Uniform"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-
         </ItemsControl>
 
     </Grid>

@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <cv:ImagePathConverter x:Key="ImagePathConverter"/>
             <cv:WidthToFontSizeConverter x:Key="WidthToFontSizeConverter"/>
+            <cv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

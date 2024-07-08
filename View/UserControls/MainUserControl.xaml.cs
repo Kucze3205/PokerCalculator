@@ -23,6 +23,7 @@ namespace PokerCalculatorWPF.View.UserControls
         public MainUserControl()
         {
             InitializeComponent();
+            playersAmountTab.ItemsSource = Enumerable.Range(2, 9).ToList();
         }
     }
 }

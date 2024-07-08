@@ -1,23 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace PokerCalculatorWPF.Model
 {
-    public class Card : IEquatable<Card>
+    public class Card : IEquatable<Card>, INotifyPropertyChanged
     {
         public delegate void MainUserControlMethod(string message);
         public MainUserControlMethod method;
 
+        private bool visibility = true;
+
         public string Id { get; set; }
+        public int IdinInt { get; set; } 
         public int type { get; set; }
         public int value { get; set; }
+        public bool Visibility
+        {
+            get { return visibility; }
+            set
+            {
+                visibility = value;
+                RaisePropertyChanged(nameof(Visibility));
+            }
+        }
 
-        public ICommand GetId { get; set; }
+        public ICommand CardClicked { get; set; }
 
         public Card(string id)
         {
@@ -41,7 +55,9 @@ namespace PokerCalculatorWPF.Model
 
             value = Convert.ToInt32(valueC) - 2;
 
-            GetId = new RelayCommand(new Action<object>(getid));
+            IdinInt = type * 12 + value;
+
+            CardClicked = new RelayCommand(new Action<object>(getid));
         }
 
         public bool Equals(Card other)
@@ -58,15 +74,16 @@ namespace PokerCalculatorWPF.Model
 
         private void getid(object obj)
         {
+            Visibility = false;
             method(Id);
         }
-    }
 
-    public class ConvertfromJson
-    {
-        public string formation { get; set; }
-        public int value { get; set; }
-    }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }  
 
 }

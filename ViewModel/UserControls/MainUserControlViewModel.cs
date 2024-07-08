@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
         private Card[] deck2 = new Card[52];
         public Simulator simulator = new Simulator();
         private string result;
+        private bool addCards = true;
 
         Thread simulatingInBackGround = null;
         #endregion
@@ -73,6 +75,17 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
                 RaisePropertyChanged(nameof(Result));
             }
         }
+        public bool AddCards
+        {
+            get { return addCards; }
+            set
+            {
+                addCards = value;
+                RaisePropertyChanged(nameof(AddCards));
+            }
+
+        }
+        public int PlayersNum { get; set; }
 
         #endregion
 
@@ -104,7 +117,7 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
 
         #region Methods
         private void Getid(string str)
-        {
+        {                      
             if (simulatingInBackGround != null && simulatingInBackGround.IsAlive) 
             {
                 simulatingInBackGround.Abort();
@@ -119,17 +132,18 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
             {
                 _Hand.Add(new Card(str));
                 MyCards.Add(new Card(str));
-            }          
+            }
+            if (CardsOnTable.Count == 5) AddCards = false;
 
             if (_Hand.Count == 2)
             {
 
                 simulatingInBackGround = new Thread(new ThreadStart(() =>
                 {
-                    simulator.probability(_Hand[0], _Hand[1], _inGameCards, 3);
+                    simulator.probability(_Hand[0], _Hand[1], _inGameCards, PlayersNum);
                 }));
                 simulatingInBackGround.Start();
-            }                                 
+            }                                
         }
 
         private void reset(object obj)
@@ -139,10 +153,16 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
             CardsOnTable.Clear();
             MyCards.Clear();
             Result = "";
+            AddCards = true;
 
             if (simulatingInBackGround != null && simulatingInBackGround.IsAlive)
             {
                 simulatingInBackGround.Abort();
+            }
+
+            foreach (Card card in Deck) 
+            {
+                card.Visibility = true;
             }
         }
 

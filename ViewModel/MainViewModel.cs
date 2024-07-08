@@ -17,6 +17,7 @@ namespace PokerCalculatorWPF.ViewModel
         #region Fields
         private MainUserControlViewModel mainUserControlViewModel = new MainUserControlViewModel();
         private UserControl userControl;
+        
         #endregion
 
         #region Properties
@@ -30,15 +31,16 @@ namespace PokerCalculatorWPF.ViewModel
 
             }
         }
+        
         #endregion
-        #region Commands        
-        public ICommand SetSettingView { get; set; }
+        #region Commands
+
         #endregion
 
         #region Constructor
         public MainViewModel()
         {
-            UserControl = new MainUserControl() { DataContext = mainUserControlViewModel };          
+            UserControl = new MainUserControl() { DataContext = mainUserControlViewModel };
         }
         #endregion
     }
