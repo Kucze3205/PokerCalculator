@@ -81,13 +81,14 @@
 
         <Grid Grid.Row="2" Grid.Column="4">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Text="players:" Grid.Row="0" Margin="0, 30, 0, 50" 
-                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="15" />
-            <ComboBox x:Name="playersAmountTab" Grid.Row="1"  Margin="0, 50, 150, 0" Height="30" 
-                  ItemsSource="{Binding playersAmount}" SelectedValue="{Binding PlayersNum}"/>
+            
+            <TextBlock Text="players:" Grid.Row="0" 
+                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Bottom"/>
+            <ComboBox x:Name="playersAmountTab" Grid.Row="1" Height="30" 
+                  ItemsSource="{Binding playersAmount}" SelectedValue="{Binding PlayersNum}" VerticalAlignment="Top" Width="75" HorizontalAlignment="Left"/>
         </Grid>
         
 
