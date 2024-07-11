@@ -75,14 +75,21 @@
                    FontStretch="Medium" FontWeight="ExtraLight" FontSize="32" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Button Grid.Column="5" Grid.Row="2" Margin="20" Command="{Binding ResetButton}">
+        <Button Grid.Column="5" Grid.Row="2" Margin="20" Command="{Binding ResetButton}" Style="{StaticResource OvalButtonStyle}">
             <TextBlock Text="RESET" Margin="10, 0" FontStretch="Medium" FontWeight="ExtraLight" FontSize="25"/>
         </Button>
 
-        <TextBlock Text="players:" Grid.Row="2" Grid.Column="4" Margin="0, 30, 0, 50" 
-                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="15"/>
-        <ComboBox x:Name="playersAmountTab" Grid.Row="2" Grid.Column="4" Margin="0, 50, 150, 0" Height="30" 
+        <Grid Grid.Row="2" Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="players:" Grid.Row="0" Margin="0, 30, 0, 50" 
+                   FontStretch="Medium" FontWeight="ExtraLight" FontSize="15" />
+            <ComboBox x:Name="playersAmountTab" Grid.Row="1"  Margin="0, 50, 150, 0" Height="30" 
                   ItemsSource="{Binding playersAmount}" SelectedValue="{Binding PlayersNum}"/>
+        </Grid>
+        
 
         <ItemsControl ItemsSource="{Binding Deck}" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="2" IsEnabled="{Binding AddCards}">
             <ItemsControl.ItemsPanel>
@@ -93,7 +100,7 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding CardClicked}" Padding="0" Visibility="{Binding Visibility, Converter={StaticResource BoolToVisibilityConverter}}" >
+                    <Button Command="{Binding CardClicked}" Padding="0" Visibility="{Binding Visibility, Converter={StaticResource BoolToVisibilityConverter}}" Width="auto">
                         <Image Source="{Binding Id, Converter={StaticResource ImagePathConverter}}" 
                                Stretch="Uniform"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
