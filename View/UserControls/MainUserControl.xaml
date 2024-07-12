@@ -30,10 +30,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Twoje karty" Grid.Column="0" Margin="10, 0" 
+        <TextBlock Text="Your hand" Grid.Column="0" Margin="10, 0" 
                    FontStretch="Medium" FontWeight="ExtraLight" FontSize="32" 
                    HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Karty Na stole" Grid.Column="3" Margin="10, 0" 
+        <TextBlock Text="Table" Grid.Column="3" Margin="10, 0" 
                    FontStretch="Medium" FontWeight="ExtraLight" FontSize="32"             
                    HorizontalAlignment="Center" Grid.ColumnSpan="3">
         </TextBlock>
@@ -67,7 +67,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <TextBlock Text="Prawdopodobieństwo: " Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+        <TextBlock Text="win+draw propability: " Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                    Margin="10, 0" FontStretch="Medium" FontWeight="ExtraLight" 
                    FontSize="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    />
@@ -85,7 +85,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             
-            <TextBlock Text="players:" Grid.Row="0" 
+            <TextBlock Text="players in game:" Grid.Row="0" 
                    FontStretch="Medium" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Bottom"/>
             <ComboBox x:Name="playersAmountTab" Grid.Row="1" Height="30" 
                   ItemsSource="{Binding playersAmount}" SelectedValue="{Binding PlayersNum}" VerticalAlignment="Top" Width="75" HorizontalAlignment="Left"/>

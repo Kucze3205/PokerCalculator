@@ -85,7 +85,7 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
             }
 
         }
-        public int PlayersNum { get; set; }
+        public int PlayersNum { get; set; } = 2;
 
         #endregion
 
@@ -109,7 +109,7 @@ namespace PokerCalculatorWPF.ViewModel.UserControls
                     index++;
                 }
             }
-
+            RaisePropertyChanged(nameof(PlayersNum));
             simulator.sendValue = reseveValue;
             ResetButton = new RelayCommand(new Action<object>(reset));
         }
